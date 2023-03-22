@@ -1,6 +1,6 @@
-import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
-import { Book } from './book.entity';
+import { Injectable } from '@nestjs/common';
 import { BookDto } from './bookDto.class';
+import { Book } from './book.entity';
 import { InjectRepository} from '@nestjs/typeorm';
 import { Repository } from 'typeorm'; 
 
@@ -29,7 +29,7 @@ export class BooksService {
   }
 
   async updateBook(bookId: any, newBook: BookDto): Promise<Book> { 
-    let toUpdate = await this.booksRepository.findOne(bookId); 
+    let toUpdate = await this.booksRepository.findOne(bookId);  
 
     let updated = Object.assign(toUpdate, newBook); 
 
