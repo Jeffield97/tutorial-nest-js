@@ -20,7 +20,7 @@ export class BooksService {
     return await this.booksRepository.findOne({ where: { id: parseInt(bookId) } }); 
   }
 
-  createBook(newBook: BookDto): Promise<Book> {
+  async createBook(newBook: BookDto): Promise<Book> {
     return this.booksRepository.save(newBook);
   }
 
@@ -28,8 +28,9 @@ export class BooksService {
     return await this.booksRepository.delete({ id: parseInt(bookId) });
   }
 
-  async updateBook(bookId: any, newBook: BookDto): Promise<Book> { 
-    let toUpdate = await this.booksRepository.findOne(bookId);  
+  async updateBook(bookId: string, newBook: BookDto): Promise<Book> { 
+    console.log(bookId)
+    let toUpdate =  await this.booksRepository.findOne({ where: { id: parseInt(bookId) } }); 
 
     let updated = Object.assign(toUpdate, newBook); 
 

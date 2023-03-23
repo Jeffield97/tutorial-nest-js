@@ -12,11 +12,11 @@ export class BooksController {
         return this.booksService.findAll(request.query);
     }
     @Get(':bookId')
-    findBook(@Param('bookId') bookId: string):Promise <Book> {
+    findBook(@Param('bookId') bookId: string): Promise<Book> {
         return this.booksService.findBook(bookId);
     }
     @Post()
-    createBook(@Body() newBook: BookDto):Promise <Book> {
+    createBook(@Body() newBook: BookDto): Promise<Book> {
         // let newBook: any = body;
         return this.booksService.createBook(newBook)
     }
