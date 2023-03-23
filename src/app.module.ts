@@ -9,6 +9,7 @@ import { Book } from './books/book.entity';
 import { configService } from 'config/config.service';
 import { AuthModule } from './utilities/auth.module';
 import { WinstonModule } from 'nest-winston'; 
+import { HealthModule } from './health/health.module';
 import * as winston from 'winston';
 import * as path from 'path';
 
@@ -41,7 +42,7 @@ import * as path from 'path';
       }),
       new winston.transports.Console({ level: 'debug' }),
     ],
-  }),
+  }), HealthModule,
 ],
   controllers: [AppController],
   providers: [AppService],
