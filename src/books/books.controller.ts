@@ -1,16 +1,25 @@
 import { Controller, Get, Post, Delete, Put, Body, Param, Req } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common/decorators';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { Book } from './book.entity';
 import { BookDto } from './bookDto.class';
 import { BooksService } from './books.service';
 
+@ApiTags('book')
 @Controller('books')
 @UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth('access-token')
 export class BooksController {
     constructor(private booksService: BooksService) { }
     @Get()
+    @ApiOperation({ summary: 'Obtener lista de libros' })
+    @ApiResponse({
+        status: 201,
+        description: 'Lista de libros',
+        type: Book,
+    })
     findAll(@Req() request: Request): Promise<Book[]> {
         return this.booksService.findAll(request.query);
     }
