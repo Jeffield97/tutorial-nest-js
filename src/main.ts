@@ -8,8 +8,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
   // Configurar títulos de documnentación
   const options = new DocumentBuilder()
-    .setTitle('Bookstore REST API')
-    .setDescription('API REST de Bookstore')
+    .setTitle('Sample REST API')
+    .setDescription('Sample API REST description')
     .setVersion('1.0')
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' },
@@ -17,9 +17,10 @@ async function bootstrap() {
     )
     .build();
   const document = SwaggerModule.createDocument(app, options);
-
+  
   // La ruta en que se sirve la documentación
   SwaggerModule.setup('docs', app, document);
+  // await RedocModule.setup('/docs', app, document, redocOptions);
   await app.listen(3000);
 }
 bootstrap();
