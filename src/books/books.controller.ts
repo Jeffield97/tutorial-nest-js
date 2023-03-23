@@ -1,10 +1,13 @@
 import { Controller, Get, Post, Delete, Put, Body, Param, Req } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common/decorators';
+import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { Book } from './book.entity';
 import { BookDto } from './bookDto.class';
 import { BooksService } from './books.service';
 
 @Controller('books')
+@UseGuards(AuthGuard('jwt'))
 export class BooksController {
     constructor(private booksService: BooksService) { }
     @Get()
